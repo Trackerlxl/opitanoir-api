@@ -1,0 +1,14 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Permitir acceso directo a archivos existentes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirigir todo al router principal
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Cabeceras de seguridad adicionales
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "DENY"
