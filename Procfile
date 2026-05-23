@@ -1,1 +1,1 @@
-web: php -S 0.0.0.0:$PORT router.php
+web: php -d extension=pdo_pgsql -d extension=pgsql -S 0.0.0.0:$PORT router.php
