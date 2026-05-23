@@ -130,6 +130,19 @@ function handlePostOrder(): void
         $inserted  = $stmtInsert->fetch();
         $venta_id  = (int) $inserted['id'];
 
+        // Restar stock
+        $stmtStock = $pdo->prepare("
+            UPDATE productos
+            SET stock = stock - :cantidad
+            WHERE id_producto = :id_producto
+            AND talla = :talla
+        ");
+        $stmtStock->execute([
+            ':cantidad'   => $cantidad,
+            ':id_producto' => $id_producto,
+            ':talla'      => $talla,
+        ]);
+
         // --- 5. Notificar al webhook de n8n ----------------------------------
         $payload = [
             'venta_id'       => $venta_id,
