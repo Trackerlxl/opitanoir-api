@@ -31,7 +31,7 @@ class Database
             http_response_code(503);
             echo json_encode([
                 'success' => false,
-                'errors'  => ['db' => 'No se pudo conectar a la base de datos. Intente nuevamente.']
+                'errors'  => ['db' => $e->getMessage()]
             ]);
             // No exponer detalles de la excepción al cliente
             error_log('[OpitaNoir DB] ' . $e->getMessage());
